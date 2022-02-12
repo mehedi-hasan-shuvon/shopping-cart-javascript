@@ -11,7 +11,7 @@ function updateProductNumber(product, price, isIncreasing) {
     const productTotal = document.getElementById(product + '-total');
     productTotal.innerText = productNumber * price;
 
-    calculateTotal();
+    calculateTotal(1219, 59);
 }
 
 function getInputValue(product) {
@@ -19,10 +19,11 @@ function getInputValue(product) {
     const productNumber = parseInt(productInput.value);
     return productNumber;
 }
-function calculateTotal() {
+function calculateTotal(value1, value2) {
 
-    const phoneTotal = getInputValue('phone') * 1219;
-    const caseTotal = getInputValue('case') * 59;
+    const phoneTotal = getInputValue('phone') * value1;
+    const caseTotal = getInputValue('case') * value2;
+    console.log(phoneTotal, caseTotal);
     const subTotal = phoneTotal + caseTotal;
     const tax = subTotal / 10;
     const totalPrice = subTotal + tax;
@@ -50,3 +51,22 @@ document.getElementById("phone-minus").addEventListener('click', function () {
 });
 
 
+document.getElementById("remove1").addEventListener('click', function () {
+    document.getElementById('box1').style.display = "none";
+    if (getInputValue('case') != 0) {
+        calculateTotal(0, 59);
+    } else {
+        calculateTotal(0, 0);
+    }
+    document.getElementById('phone-number').value = 0;
+})
+document.getElementById("remove2").addEventListener('click', function () {
+    document.getElementById('box2').style.display = "none";
+    console.log(getInputValue('phone'), "fdsfd");
+    if (getInputValue('phone') != 0) {
+        calculateTotal(1219, 0);
+    } else {
+        calculateTotal(0, 0);
+    }
+    document.getElementById('case-number').value = 0;
+})
